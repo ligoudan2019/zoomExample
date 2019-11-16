@@ -91,6 +91,7 @@
 let small = document.querySelector('.small');
 let big = document.querySelector('.big');
 let mask = document.querySelector('.mask');
+let box = document.querySelector('.box');
 // 注册鼠标的移入事件
 small.onmouseover = function(){
   //把大盒子和黄色遮罩显示
@@ -102,6 +103,32 @@ small.onmouseout = function(){
   //把大盒子和黄色遮罩隐藏
   big.style.display = 'none';
   mask.style.display = 'none';
+}
+
+
+// 实现鼠标在小图上移动的效果
+small.onmousemove = function(e){
+  //控制黄色的遮罩随着鼠标的移动而移动
+  // 先获取鼠标的坐标
+  let mx = e.pageX;
+  let my = e.pageY;
+  // 经过计算，设置给黄色遮罩
+  // 黄色遮罩的位置 = 鼠标位置 - box距离body的左上角的距离 - mask宽高的一半
+  let x = mx - box.offsetLeft - mask.offsetWidth / 2;
+  let y = my - box.offsetTop - mask.offsetHeight / 2;
+  // 要让遮罩不能跑出小盒子的范围
+  if(x <= 0){
+    x = 0;
+  }
+  y = y <= 0 ? 0 : y;
+  // 最大的移动距离
+  let maxX = small.offsetWidth - mask.offsetWidth;
+  let maxY = small.offsetHeight - mask.offsetHeight;
+  x = x >= maxX ? maxX : x;
+  y = y >= maxY ? maxY : y;
+  // 设置给黄色遮罩
+  mask.style.top = y + 'px';
+  mask.style.left = x + 'px';
 }
 </script>
 </html>
