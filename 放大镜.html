@@ -86,5 +86,22 @@
   步骤：
     一个一个的效果实现
 */
+
+// 先实现鼠标的移入和移出
+let small = document.querySelector('.small');
+let big = document.querySelector('.big');
+let mask = document.querySelector('.mask');
+// 注册鼠标的移入事件
+small.onmouseover = function(){
+  //把大盒子和黄色遮罩显示
+  big.style.display = 'block';
+  mask.style.display = 'block';
+}
+// 注册鼠标的移出事件
+small.onmouseout = function(){
+  //把大盒子和黄色遮罩隐藏
+  big.style.display = 'none';
+  mask.style.display = 'none';
+}
 </script>
 </html>
